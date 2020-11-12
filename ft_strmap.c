@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 08:20:09 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/10 13:45:10 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/11 19:41:32 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,10 @@
 
 char  *ft_strmap(char const *s, char (*f)(char))
 {
-  
+  char *s2;
+
+  s2 = ft_strnew(ft_strlen((char *)s));
+  while (*s && *s2)
+    (*f)(s2++);
+  return (s2);
 }

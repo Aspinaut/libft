@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 08:20:44 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/10 13:43:57 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/12 08:36:55 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,13 @@
 
 int  ft_strequ(char const *s1, char const *s2)
 {
-  
+  while (*s1 && *s2 && *s1 == *s2)
+  {
+    s1++;
+    s2++;
+  }
+  if (*s1 == *s2)
+    return (1);
+  else
+    return (0);
 }

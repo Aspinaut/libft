@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 08:18:45 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/11 10:55:02 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/12 09:17:14 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 char  *ft_strnew(size_t size)
 {
-  return ((char *)ft_memalloc((size + 1) * (sizeof(char)));
+  return ((char *)ft_memalloc((size + 1) * (sizeof(char))));
 }

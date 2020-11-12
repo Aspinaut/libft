@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 18:15:41 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/10 13:33:03 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/12 11:43:41 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 void	ft_putstr(char const *s)
 {
-	int i;
-
-	i = 0;
-	while ((char *)s[i] != '\0')
+	while (*s)
 	{
-		write(1, &(char *)s[i], 1);
-		i++;
+		write(1, s, 1);
+		s++;
 	}
 }

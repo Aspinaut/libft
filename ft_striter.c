@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 08:19:31 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/11 14:54:46 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/12 08:19:19 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void add_one_to_char(char *c)
 
 void  ft_striter(char *s, void (*f)(char *))
 {
-  while (*s != '\0')
+  while (*s)
   {
     (*f)(s++);
   }
