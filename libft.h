@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 18:01:20 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/14 08:27:25 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/14 17:44:19 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 // char  *ft_itoa(int n);
 // char  **ft_strsplit(char const *s, char c);
 
+void  *calloc(size_t nmemb, size_t size);
+size_t  strlcpy(char *dst, const char *src, size_t size);
 size_t  ft_strlcat(char *dst, const char *src, size_t size);
 void  ft_putnbr_fd(int n, int fd);
 void  ft_putendl_fd(char const *s, int fd);
@@ -34,7 +36,7 @@ void  ft_putchar_fd(char c, int fd);
 void  ft_putendl(char const *s);
 void	ft_putstr(char const *s);
 char  *ft_strtrim(char const *s1, char const *set);
-char  *ft_strsub(char const *s, unsigned int start, size_t len);
+char  *ft_substr(char const *s, unsigned int start, size_t len);
 int  ft_strnequ(char const *s1, char const *s2, size_t n);
 int  ft_strequ(char const *s1, char const *s2);
 char  *ft_strmapi(char const *s, char (*f)(unsigned int, char));

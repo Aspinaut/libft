@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/10 08:57:35 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/14 07:44:22 by vmasse           ###   ########.fr       */
+/*   Created: 2020/11/14 17:03:49 by vmasse            #+#    #+#             */
+/*   Updated: 2020/11/14 17:14:41 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+char  *ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	count;
-	size_t	d_size;
+  char    *sample;
+  size_t  i;
 
-	count = 0;
-	while (dest[count] && count < size)
-		count++;
-	d_size = count;
-	while (src[count - d_size] && count + 1 < size)
-	{
-		dest[count] = src[count - d_size];
-		count++;
-	}
-	if (d_size < size)
-		dest[count] = '\0';
-	return (d_size + ft_strlen((char*)src));
+  i = 0;
+  if (!s)
+    return (NULL);
+  if (ft_strlen((char *)s) < (int)start)
+    return (ft_strdup(""));
+  if (!(sample = ft_strnew(len)))
+    return (NULL);
+  while (i < len)
+  {
+    sample[i] = s[start];
+    start++;
+    i++;
+  }
+  return (sample);
 }
