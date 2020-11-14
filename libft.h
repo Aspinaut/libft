@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 18:01:20 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/11 12:50:48 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/13 06:31:28 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,19 @@
 # include <stddef.h>
 # include <stdio.h>
 
+// void  *ft_memmove(void *dest, const void *src, size_t n);
+// void  *memchr(const void *s, int c, size_t n);
+// int	ft_memcmp(const void *s1, const void *s2, size_t n);
+// char  *ft_itoa(int n);
+// size_t  ft_strlcat(char *dst, const char *src, size_t size);
+// char  **ft_strsplit(char const *s, char c);
+
 void  ft_putnbr_fd(int n, int fd);
 void  ft_putendl_fd(char const *s, int fd);
 void  ft_putstr_fd(char const *s, int fd);
 void  ft_putchar_fd(char c, int fd);
 void  ft_putendl(char const *s);
 void	ft_putstr(char const *s);
-char  *ft_itoa(int n);
-char  **ft_strsplit(char const *s, char c);
 char  *ft_strtrim(char const *s);
 char  *ft_strsub(char const *s, unsigned int start, size_t len);
 int  ft_strnequ(char const *s1, char const *s2, size_t n);
@@ -41,7 +46,6 @@ void  ft_strdel(char **as);
 char  *ft_strnew(size_t size);
 void  ft_memdel(void **ap);
 void  *ft_memalloc(size_t size);
-char  *ft_itoa(int n);
 char	*ft_strjoin(char const *s1, char const *s2);
 void	ft_putnbr(int n);
 void	ft_putchar(char c);
