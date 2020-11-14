@@ -1,0 +1,693 @@
+ft_memset:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_bzero:      [OK] [OK] [OK] [OK] 
+ft_memcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [CRASH] 
+[crash]: your memcpy does not behave well with NULL as both params with size
+Test code:
+	ft_memcpy(((void*)0), ((void*)0), 3);
+
+
+ft_memccpy:    [OK] [OK] [FAILED] [FAILED] [FAILED] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+[fail]: your memccpy doesn't cast the stop-character into unsigned char
+Test code:
+	char buff1[] = "abcdefghijklmnopqrstuvwxyz";
+	char buff2[] = "abcdefghijklmnopqrstuvwxyz";
+	char *src = "string with\200inside !";
+
+	memccpy(buff1, src, 0600, 21);
+	ft_memccpy(buff2, src, 0600, 21);
+	if (!memcmp(buff1, buff2, 21))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     memccpy: |string with€mnopqrstuvwxyz|
+  ft_memccpy: |string with€inside !|
+
+[fail]: your memccpy's return is false/doesn't work with basic params
+Test code:
+	char src[] = "test basic du memccpy !";
+	char buff1[22];
+
+	memset(buff1, 0, sizeof(buff1));
+	char *r1 = memccpy(buff1, src, 'm', 22);
+	char *r2 = ft_memccpy(buff1, src, 'm', 22);
+	if (r1 != r2)
+		exit(TEST_FAILED);
+	r1 = memccpy("", src, 'm', 0);
+	r2 = ft_memccpy("", src, 'm', 0);
+	if (r1 != r2)
+		exit(TEST_FAILED);
+	exit(TEST_SUCCESS);
+
+Diffs:
+     memccpy: ||
+  ft_memccpy: |test basic du m|
+
+[fail]: your memccpy does not work with not found char
+Test code:
+	char src[] = "test basic du memccpy !";
+	char buff1[22];
+	char buff2[22];
+	char *r1 = memccpy(buff1, src, 'z', 22);
+	char *r2 = ft_memccpy(buff2, src, 'z', 22);
+
+	if (r1 == r2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     memccpy: |(null)|
+  ft_memccpy: |test basic du memccpy |
+
+ft_memmove:    [MISSING]
+ft_memcmp:     [MISSING]
+ft_strlen:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_isalpha:    [OK] 
+ft_isdigit:    [OK] 
+ft_isalnum:    [FAILED] 
+[fail]: your isalnum just doesn't work, REALLY ?!
+Test code:
+	int i;
+
+	i = -1;
+	while (i < 530)
+	{
+		if (!!ft_isalnum(i) != !!((*__ctype_b_loc ())[(int) ((i))] & (unsigned short int) _ISalnum))
+			exit(TEST_FAILED);
+		i++;
+	}
+	exit(TEST_SUCCESS);
+
+Diffs:
+
+
+ft_isascii:    [OK] 
+ft_isprint:    [FAILED] 
+[fail]: your isprint just doesn't work, REALLY ?!
+Test code:
+	int i;
+
+	i = -1;
+	while (i < 530)
+	{
+		if (!!ft_isprint(i) != !!((*__ctype_b_loc ())[(int) ((i))] & (unsigned short int) _ISprint))
+		{
+			exit(TEST_FAILED);
+		}
+		i++;
+	}
+	exit(TEST_SUCCESS);
+
+Diffs:
+     isprint: |16384|
+  ft_isprint: |0|
+param: (32)
+
+ft_toupper:    [FAILED] 
+[fail]: your toupper just doesn't work, REALLY ?!
+Test code:
+	int i;
+
+	i = -100;
+	while (i < 530)
+	{
+		if (ft_toupper(i) != (__extension__ ({ int __res; if (sizeof (i) > 1) { if (__builtin_constant_p (i)) { int __c = (i); __res = __c < -128 || __c > 255 ? __c : (*__ctype_toupper_loc ())[__c]; } else __res = toupper (i); } else __res = (*__ctype_toupper_loc ())[(int) (i)]; __res; })))
+		{
+				;
+			exit(TEST_FAILED);
+		}
+		i++;
+	}
+	exit(TEST_SUCCESS);
+
+Diffs:
+     toupper: |156|
+  ft_toupper: |-100|
+param: (-100)
+
+ft_tolower:    [FAILED] 
+[fail]: your tolower just doesn't work, REALLY ?!
+Test code:
+	int i;
+
+	i = -100;
+	while (i < 530)
+	{
+		if (ft_tolower(i) != (__extension__ ({ int __res; if (sizeof (i) > 1) { if (__builtin_constant_p (i)) { int __c = (i); __res = __c < -128 || __c > 255 ? __c : (*__ctype_tolower_loc ())[__c]; } else __res = tolower (i); } else __res = (*__ctype_tolower_loc ())[(int) (i)]; __res; })))
+		{
+				;
+			exit(TEST_FAILED);
+		}
+		i++;
+	}
+	exit(TEST_SUCCESS);
+
+Diffs:
+     tolower: |156|
+  ft_tolower: |-100|
+param: (-100)
+
+ft_strchr:     [OK] [OK] [OK] [OK] [OK] [OK] [FAILED] [OK] [OK] [OK] 
+[fail]: your strchr does not work with \0
+Test code:
+	char *src = "there is so \0ma\0ny \0 \\0 in t\0his stri\0ng !\0\0\0\0";
+	char *d1 = strchr(src, '\0');
+	char *d2 = ft_strchr(src, '\0');
+
+	if (d1 == d2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strchr: ||
+   ft_strchr: ||
+
+ft_strrchr:    [OK] [OK] [OK] [OK] [FAILED] [OK] [CRASH] [OK] 
+[fail]: your strrchr does not work with \0
+Test code:
+	char *src = "there is so \0ma\0ny \0 \\0 in t\0his stri\0ng !\0\0\0\0";
+	char *d1 = strrchr(src, '\0');
+	char *d2 = ft_strrchr(src, '\0');
+
+	if (d1 == d2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strrchr: ||
+  ft_strrchr: |(null)|
+
+[crash]: your strrchr crash because it read too many bytes or attempt to write on s !
+Test code:
+	char *src = electric_alloc(10);
+
+	strcpy(src, "123456789");
+	ft_strrchr(src, 'a');
+	src = electric_alloc_rev(10);
+	strcpy(src, "123456789");
+	ft_strrchr(src, 'a');
+	exit(TEST_SUCCESS);
+
+
+ft_strncmp:    [OK] [OK] [OK] [OK] [OK] [OK] [FAILED] [OK] [OK] [FAILED] [OK] [OK] [OK] 
+[fail]: your strncmp does not cast in unsigned char the diff
+Test code:
+	char *s1 = "\200";
+	char *s2 = "\0";
+	int i1 = ((strncmp(s1, s2, 1) > 0) ? 1 : ((strncmp(s1, s2, 1) < 0) ? -1 : 0));
+	int i2 = ((ft_strncmp(s1, s2, 1) > 0) ? 1 : ((ft_strncmp(s1, s2, 1) < 0) ? -1 : 0));
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strncmp: |1|
+  ft_strncmp: |-1|
+
+[fail]: your strncmp does not work with non ascii chars
+Test code:
+	char *s1 = "\x12\xff\x65\x12\xbd\xde\xad";
+	char *s2 = "\x12\x02";
+	size_t size = 6;
+	int i1 = ((strncmp(s1, s2, size) > 0) ? 1 : ((strncmp(s1, s2, size) < 0) ? -1 : 0));
+	int i2 = ((ft_strncmp(s1, s2, size) > 0) ? 1 : ((ft_strncmp(s1, s2, size) < 0) ? -1 : 0));
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strncmp: |1|
+  ft_strncmp: |-1|
+
+ft_strlcpy:    [MISSING]
+ft_strlcat:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strnstr:    [FAILED] [OK] [FAILED] [FAILED] [OK] [OK] [OK] [OK] [OK] [OK] [FAILED] [OK] [OK] [OK] 
+[fail]: your strnstr does not work with basic input
+Test code:
+	char *s1 = "see FF your FF return FF now FF";
+	char *s2 = "FF";
+	size_t max = strlen(s1);
+	char *i1 = strnstr(s1, s2, max);
+	char *i2 = ft_strnstr(s1, s2, max);
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strnstr: |FF your FF return FF now FF|
+  ft_strnstr: |(null)|
+
+[fail]: your strnstr does not work with basic input
+Test code:
+	char *s1 = "MZIRIBMZIRIBMZE123";
+	char *s2 = "MZIRIBMZE";
+	size_t max = strlen(s2);
+	char *i1 = strnstr(s1, s2, max);
+	char *i2 = ft_strnstr(s1, s2, max);
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strnstr: |(null)|
+  ft_strnstr: |MZIRIBMZE123|
+
+[fail]: your strnstr does not work with basic input
+Test code:
+	char *big = "abcdef";
+	char *little = "abcdefghijklmnop";
+	size_t max = strlen(big);
+	char *s1 = strnstr(big, little, max);
+	char *s2 = ft_strnstr(big, little, max);
+
+	if (s1 == s2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strnstr: |(null)|
+  ft_strnstr: |abcdef|
+
+[fail]: your strnstr does not work with empty strings and 0 length
+Test code:
+	char *s1 = "A";
+	char *i1 = strnstr(s1, s1, 2);
+	char *i2 = ft_strnstr(s1, s1, 2);
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strnstr: |A|
+  ft_strnstr: |(null)|
+
+ft_atoi:       [OK] [FAILED] [OK] [FAILED] [OK] [FAILED] [FAILED] [OK] [FAILED] [OK] [OK] [KO] [OK] [OK] 
+[fail]: your atoi does not work with negative numbers
+Test code:
+	char *n = "-085";
+	int i1 = atoi(n);
+	int i2 = ft_atoi(n);
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+        atoi: |-85|
+     ft_atoi: |0|
+
+[fail]: your atoi is not working with blanks
+Test code:
+	char *n = "\t\v\f\r\n \f-06050";
+	int i1 = atoi(n);
+	int i2 = ft_atoi(n);
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+        atoi: |-6050|
+     ft_atoi: |0|
+
+[fail]: your atoi is not working with non space invisible char
+Test code:
+	char *n = "\e06050";
+	int i1 = atoi(n);
+	int i2 = ft_atoi(n);
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+        atoi: |0|
+     ft_atoi: |6050|
+
+[fail]: your atoi is not working with blanks
+Test code:
+	char *n = "-123THERE IS A NYANCAT UNDER YOUR BED";
+	int i1 = atoi(n);
+	int i2 = ft_atoi(n);
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+        atoi: |-123|
+     ft_atoi: |0|
+
+[fail]: your atoi does not work with int min value
+Test code:
+	char n[15];
+
+	sprintf(n, "%i", (-2147483647 -1));
+	int i1 = atoi(n);
+	int i2 = ft_atoi(n);
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+        atoi: |-2147483648|
+     ft_atoi: |0|
+
+[KO]: your atoi does not work with over long max value
+Test code:
+	char n[40] = "99999999999999999999999999";
+	int i1 = atoi(n);
+	int i2 = ft_atoi(n);
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_KO);
+
+Diffs:
+        atoi: |-1|
+     ft_atoi: |-469762049|
+
+ft_calloc:     [MISSING]
+ft_strdup:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_substr:     [MISSING]
+ft_strjoin:    [OK] [OK] [OK] [CRASH] [OK] {not protected}
+[crash]: you did not protect your malloc return
+Test code:
+	char *s1 = "where is my ";
+	char *s2 = "malloc ???";
+
+	char *res = ft_strjoin(s2, s1);
+	if (res == ((void*)0))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+
+ft_strtrim:    [MISSING]
+ft_split:      [MISSING]
+ft_itoa:       [MISSING]
+ft_strmapi:    [FAILED] [FAILED] [FAILED] [OK] [CRASH] {not protected}
+[fail]: your strmapi does not work
+Test code:
+	char *b = "override this !";
+	char b2[0xF0];
+	size_t size = strlen(b);
+
+	for (size_t i = 0; i < size; i++)
+		b2[i] = f_strmapi(i, b[i]);
+	b2[size] = 0;
+	char *ret = ft_strmapi(b, f_strmapi);
+	if (!strcmp(b2, ret))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strmapi: ||
+  ft_strmapi: |owguvnjl(}rt-/|
+
+[fail]: your strmapi does not malloc ?
+Test code:
+	char *b = "override this !";
+	char b2[0xF0];
+	size_t size = strlen(b);
+
+	for (size_t i = 0; i < size; i++)
+		b2[i] = f_strmapi(i, b[i]);
+	b2[size] = 0;
+	fd_to_buffer(1);
+	char *newstr = ft_strmapi(b, f_strmapi);
+	if (!strcmp(newstr, b2))
+		exit(TEST_SUCCESS);
+	free(newstr);
+	write(1, "", 1);
+	write(1, "", 1);
+	get_fd_buffer(1, ((void*)0), 0);
+	exit(TEST_FAILED);
+
+Diffs:
+     strmapi: |owguvnjl(}rt-/|
+  ft_strmapi: ||
+
+[fail]: your strmapi did not set \0 at the end of the string
+Test code:
+	char *b = "override this !";
+	char b2[0xF0];
+	size_t size = strlen(b);
+
+	for (size_t i = 0; i < size; i++)
+		b2[i] = f_strmapi(i, b[i]);
+	b2[size] = 0;
+	char *ret = ft_strmapi(b, f_strmapi);
+	if (!memcmp(b2, ret, size + 1))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+     strmapi: ||
+  ft_strmapi: |owguvnjl(}rt-/|
+
+[crash]: you did not protect your malloc return
+Test code:
+	char *b = "override this !";
+
+	char *newstr = ft_strmapi(b, f_strmapi);
+	if (newstr == ((void*)0))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+
+ft_putchar_fd: [OK] [OK] [KO] 
+[KO]: your putchar_fd does not work with unicode
+Test code:
+	char buff[10];
+	char buff2[10];
+	int c = L'Ã¸';
+	int len = 0;
+
+	putwchart(c, &len, buff2);
+	buff2[len] = 0;
+	fd_to_buffer(2);
+	ft_putchar_fd(c, 2);
+	write(2, "", 1);
+	get_fd_buffer(2, buff, 10);
+	if (!strcmp(buff, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_KO);
+
+Diffs:
+  putchar_fd: |ø|
+ft_putchar_fd: |Ã¸|
+
+ft_putstr_fd:  [OK] [OK] {not protected}
+ft_putendl_fd: [OK] [OK] {not protected}
+ft_putnbr_fd:  [OK] [OK] [OK] [OK] [OK] 
+ft_lstnew:     [MISSING]
+ft_lstadd_front: [MISSING]
+ft_lstsize:    [MISSING]
+ft_lstlast:    [MISSING]
+ft_lstadd_back:[MISSING]
+ft_lstdelone:  [MISSING]
+ft_lstclear:   [MISSING]
+ft_lstiter:    [MISSING]
+ft_lstmap:     [MISSING]
+ft_memalloc:   [OK] [OK] [OK] [OK] [OK] 
+ft_strcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strncpy:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strcat:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strncat:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strstr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_strcmp:     [OK] [FAILED] [OK] [FAILED] [FAILED] [OK] [OK] [FAILED] [FAILED] [CRASH] [OK] [OK] 
+[fail]: your strcmp does not work with basic input
+Test code:
+	char *s1 = "omg1";
+	char *s2 = "omg3";
+	int i1 = ((strcmp(s1, s2) > 0) ? 1 : ((strcmp(s1, s2) < 0) ? -1 : 0));
+	int i2 = ((ft_strcmp(s1, s2) > 0) ? 1 : ((ft_strcmp(s1, s2) < 0) ? -1 : 0));
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strcmp: |-1|
+   ft_strcmp: |0|
+
+[fail]: your strcmp does not work with basic input
+Test code:
+	char *s1 = "AAAAAAAAAB";
+	char *s2 = "AAAAAAAAAC";
+	int i1 = ((strcmp(s1, s2) > 0) ? 1 : ((strcmp(s1, s2) < 0) ? -1 : 0));
+	int i2 = ((ft_strcmp(s1, s2) > 0) ? 1 : ((ft_strcmp(s1, s2) < 0) ? -1 : 0));
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strcmp: |-1|
+   ft_strcmp: |0|
+
+[fail]: your strcmp check bytes after \0
+Test code:
+	char *s1 = "yolo!\0B";
+	char *s2 = "yolo!\0A";
+	int i1 = ((strcmp(s1, s2) > 0) ? 1 : ((strcmp(s1, s2) < 0) ? -1 : 0));
+	int i2 = ((ft_strcmp(s1, s2) > 0) ? 1 : ((ft_strcmp(s1, s2) < 0) ? -1 : 0));
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strcmp: |0|
+   ft_strcmp: |1|
+
+[fail]: your strcmp does not cast in unsigned the diff
+Test code:
+	char *s1 = "\0";
+	char *s2 = "\200";
+	int i1 = ((strcmp(s1, s2) > 0) ? 1 : ((strcmp(s1, s2) < 0) ? -1 : 0));
+	int i2 = ((ft_strcmp(s1, s2) > 0) ? 1 : ((ft_strcmp(s1, s2) < 0) ? -1 : 0));
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strcmp: |-1|
+   ft_strcmp: |1|
+
+[fail]: your strcmp does not work with non ascii chars
+Test code:
+	char *s1 = "\x12\xff\x65\x12\xbd\xde\xad";
+	char *s2 = "\x12\x02";
+	int i1 = ((strcmp(s1, s2) > 0) ? 1 : ((strcmp(s1, s2) < 0) ? -1 : 0));
+	int i2 = ((ft_strcmp(s1, s2) > 0) ? 1 : ((ft_strcmp(s1, s2) < 0) ? -1 : 0));
+
+	if (i1 == i2)
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strcmp: |1|
+   ft_strcmp: |-1|
+
+[crash]: your strcmp crash because it read too many bytes !
+Test code:
+	const size_t size = 10;
+	char *s1 = electric_alloc(size);
+	char *s2 = electric_alloc(size);
+
+	strcpy(s1, "{'-_-'} !");
+	strcpy(s2, "{'-_-'} !");
+	ft_strcmp(s1, s2);
+	exit(TEST_SUCCESS);
+
+
+ft_memdel:     [OK] [OK] {protected}
+ft_strnew:     [OK] [OK] [OK] [OK] 
+ft_strdel:     [OK] [OK] {protected}
+ft_strclr:     [OK] {not protected}
+ft_striter:    [OK] [OK] {not protected}
+ft_striteri:   [OK] [OK] {not protected}
+ft_strmap:     [FAILED] [FAILED] [FAILED] [OK] [CRASH] {not protected}
+[fail]: your strmap does not work
+Test code:
+	char *b = "override this !";
+	char b2[0xF0];
+	size_t size = strlen(b);
+
+	for (size_t i = 0; i < size; i++)
+		b2[i] = f_strmap(b[i]);
+	b2[size] = 0;
+	char *ret = ft_strmap(b, f_strmap);
+	if (!strcmp(b2, ret))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strmap: ||
+   ft_strmap: |v}lyypkl'{opz'(|
+
+[fail]: your strmap did not set \0 at the end of the string
+Test code:
+	char *b = "override this !";
+	char b2[0xF0];
+	size_t size = strlen(b);
+
+	for (size_t i = 0; i < size; i++)
+		b2[i] = f_strmap(b[i]);
+	b2[size] = 0;
+	char *ret = ft_strmap(b, f_strmap);
+	if (!memcmp(b2, ret, size + 1))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+Diffs:
+      strmap: |v}lyypkl'{opz'(|
+   ft_strmap: ||
+
+[fail]: your strmap does not malloc ?
+Test code:
+	char *b = "override this !";
+	char b2[0xF0];
+	size_t size = strlen(b);
+
+	for (size_t i = 0; i < size; i++)
+		b2[i] = f_strmap(b[i]);
+	b2[size] = 0;
+	fd_to_buffer(1);
+	char *newstr = ft_strmap(b, f_strmap);
+	if (!strcmp(newstr, b2))
+		exit(TEST_SUCCESS);
+	free(newstr);
+	write(1, "", 1);
+	write(1, "", 1);
+	get_fd_buffer(1, ((void*)0), 0);
+	exit(TEST_FAILED);
+
+Diffs:
+      strmap: |v}lyypkl'{opz'(|
+   ft_strmap: ||
+
+[crash]: you did not protect your malloc return
+Test code:
+	char *b = "override this !";
+
+	char *newstr = ft_strmap(b, f_strmap);
+	if (newstr == ((void*)0))
+		exit(TEST_SUCCESS);
+	exit(TEST_FAILED);
+
+
+ft_strequ:     [OK] [OK] [OK] [OK] {not protected}
+ft_strnequ:    [OK] [OK] [OK] [OK] {not protected}
+ft_putchar:    [OK] [OK] [KO] 
+[KO]: your putchar does not work with unicode
+Test code:
+	char buff[10];
+	char buff2[10];
+	int c = L'Ã¸';
+	int len = 0;
+
+	putwchart(c, &len, buff2);
+	buff2[len] = 0;
+	fd_to_buffer(1);
+	ft_putchar(c);
+	write(1, "", 1);
+	get_fd_buffer(1, buff, 10);
+	if (!strcmp(buff, buff2))
+		exit(TEST_SUCCESS);
+	exit(TEST_KO);
+
+Diffs:
+     putchar: |ø|
+  ft_putchar: |Ã¸|
+
+ft_putstr:     [OK] [OK] {not protected}
+ft_putendl:    [OK] [OK] {not protected}
+ft_putnbr:     [OK] [OK] [OK] [OK] [OK] 

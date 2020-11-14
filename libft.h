@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 18:01:20 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/13 06:31:28 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/14 08:27:25 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 // void  *memchr(const void *s, int c, size_t n);
 // int	ft_memcmp(const void *s1, const void *s2, size_t n);
 // char  *ft_itoa(int n);
-// size_t  ft_strlcat(char *dst, const char *src, size_t size);
 // char  **ft_strsplit(char const *s, char c);
 
+size_t  ft_strlcat(char *dst, const char *src, size_t size);
 void  ft_putnbr_fd(int n, int fd);
 void  ft_putendl_fd(char const *s, int fd);
 void  ft_putstr_fd(char const *s, int fd);
 void  ft_putchar_fd(char c, int fd);
 void  ft_putendl(char const *s);
 void	ft_putstr(char const *s);
-char  *ft_strtrim(char const *s);
+char  *ft_strtrim(char const *s1, char const *set);
 char  *ft_strsub(char const *s, unsigned int start, size_t len);
 int  ft_strnequ(char const *s1, char const *s2, size_t n);
 int  ft_strequ(char const *s1, char const *s2);
@@ -73,5 +73,7 @@ int	ft_isalpha(int c);
 int	ft_isalnum(int c);
 void	ft_bzero(void *s, size_t n);
 int	ft_atoi(char *str);
+
+char  *ft_strtrim_spaces(char const *s);
 
 #endif
