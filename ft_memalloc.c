@@ -6,13 +6,13 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 08:18:00 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/11 10:37:53 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/14 09:48:40 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void *ft_memalloc(size_t size)
+void  *ft_memalloc(size_t size)
 {
   void *allocated_area;
 

@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 16:21:20 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/10 12:32:40 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/14 10:23:48 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 void	*ft_memset(void *s, int c, size_t n)
 {
 	size_t	i;
-	char	*str;
+	char		*str;
 
 	i = -1;
 	str = (char *)s;
 	while (++i < n)
 		str[i] = c;
-	s = (void *)str;
-	return (s);
+	return ((void *)str);
 }

@@ -1,9 +1,14 @@
 ft_memset:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_bzero:      [OK] [OK] [OK] [OK] 
-ft_memcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [CRASH] 
-[crash]: your memcpy does not behave well with NULL as both params with size
+ft_memcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [NO CRASH] [NO CRASH] [OK] [OK] 
+[no crash]: your memcpy does not segv with NULL on first params
 Test code:
-	ft_memcpy(((void*)0), ((void*)0), 3);
+	ft_memcpy(((void*)0), "segfaulter tu dois", 17);
+
+
+[no crash]: your memcpy does not segv with NULL on second params
+Test code:
+	ft_memcpy("            ", ((void*)0), 17);
 
 
 ft_memccpy:    [OK] [OK] [FAILED] [FAILED] [FAILED] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
@@ -147,21 +152,7 @@ Diffs:
   ft_tolower: |-100|
 param: (-100)
 
-ft_strchr:     [OK] [OK] [OK] [OK] [OK] [OK] [FAILED] [OK] [OK] [OK] 
-[fail]: your strchr does not work with \0
-Test code:
-	char *src = "there is so \0ma\0ny \0 \\0 in t\0his stri\0ng !\0\0\0\0";
-	char *d1 = strchr(src, '\0');
-	char *d2 = ft_strchr(src, '\0');
-
-	if (d1 == d2)
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-Diffs:
-      strchr: ||
-   ft_strchr: ||
-
+ft_strchr:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_strrchr:    [OK] [OK] [OK] [OK] [FAILED] [OK] [CRASH] [OK] 
 [fail]: your strrchr does not work with \0
 Test code:
@@ -482,8 +473,8 @@ Diffs:
   putchar_fd: |ø|
 ft_putchar_fd: |Ã¸|
 
-ft_putstr_fd:  [OK] [OK] {not protected}
-ft_putendl_fd: [OK] [OK] {not protected}
+ft_putstr_fd:  [OK] [OK] {protected}
+ft_putendl_fd: [OK] [OK] {protected}
 ft_putnbr_fd:  [OK] [OK] [OK] [OK] [OK] 
 ft_lstnew:     [MISSING]
 ft_lstadd_front: [MISSING]
@@ -591,9 +582,9 @@ Test code:
 ft_memdel:     [OK] [OK] {protected}
 ft_strnew:     [OK] [OK] [OK] [OK] 
 ft_strdel:     [OK] [OK] {protected}
-ft_strclr:     [OK] {not protected}
-ft_striter:    [OK] [OK] {not protected}
-ft_striteri:   [OK] [OK] {not protected}
+ft_strclr:     [OK] {protected}
+ft_striter:    [OK] [OK] {protected}
+ft_striteri:   [OK] [OK] {protected}
 ft_strmap:     [FAILED] [FAILED] [FAILED] [OK] [CRASH] {not protected}
 [fail]: your strmap does not work
 Test code:
@@ -688,6 +679,6 @@ Diffs:
      putchar: |ø|
   ft_putchar: |Ã¸|
 
-ft_putstr:     [OK] [OK] {not protected}
-ft_putendl:    [OK] [OK] {not protected}
+ft_putstr:     [OK] [OK] {protected}
+ft_putendl:    [OK] [OK] {protected}
 ft_putnbr:     [OK] [OK] [OK] [OK] [OK] 

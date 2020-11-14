@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 08:19:20 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/11 12:53:36 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/14 10:03:11 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void  ft_strclr(char *s)
 {
   size_t len;
 
+  if (!s)
+    return ;
   len = ft_strlen(s);
   ft_bzero(s, len);
 }
