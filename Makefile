@@ -26,7 +26,7 @@ ${NAMEA}: ${OBJS}
 		ar crs ${NAMEA} ${OBJS}
 		${RM} ${OBJS}
 
-${NAMESO}:
+so:
 	${CC} ${CFLAGS} ${INCLUDES} -fPIC -c ${SRCS}
 	${CC} -shared -Wl,-soname,${NAMESO} -o ${NAMESO} ${OBJS}
 
