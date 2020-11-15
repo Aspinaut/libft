@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 15:21:27 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/14 11:31:57 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/15 16:53:26 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,8 @@ void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 	while (++i < n)
 	{
 		dest_buffer[i] = src_buffer[i];
-		if ((int)src_buffer[i] == c)
-			break ;
+		if ((unsigned char)src_buffer[i] == (unsigned char)c)
+			return (dest + i + 1);
 	}
-	dest = (void *)dest_buffer;
-	return (dest);
+	return (NULL);
 }
-
-// void * ft_memccpy( void * dest, const void* src, int c, size_t count)
-// {
-//   long unsigned int i;
-//
-//   i = 0;
-//   while (count-- > 0)
-//   {
-// 	((char *)dest)[i] = ((unsigned char *)src)[i];
-// 	if (src[i] == (unsigned char)c)
-//     {
-// 	  return(dest + i + 1);
-//     }
-//     i++;
-//   }
-//   return(NULL);
-// }

@@ -1,70 +1,8 @@
 ft_memset:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_bzero:      [OK] [OK] [OK] [OK] 
-ft_memcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [NO CRASH] [NO CRASH] [OK] [OK] 
-[no crash]: your memcpy does not segv with NULL on first params
-Test code:
-	ft_memcpy(((void*)0), "segfaulter tu dois", 17);
-
-
-[no crash]: your memcpy does not segv with NULL on second params
-Test code:
-	ft_memcpy("            ", ((void*)0), 17);
-
-
-ft_memccpy:    [OK] [OK] [FAILED] [FAILED] [FAILED] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
-[fail]: your memccpy doesn't cast the stop-character into unsigned char
-Test code:
-	char buff1[] = "abcdefghijklmnopqrstuvwxyz";
-	char buff2[] = "abcdefghijklmnopqrstuvwxyz";
-	char *src = "string with\200inside !";
-
-	memccpy(buff1, src, 0600, 21);
-	ft_memccpy(buff2, src, 0600, 21);
-	if (!memcmp(buff1, buff2, 21))
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-Diffs:
-     memccpy: |string with€mnopqrstuvwxyz|
-  ft_memccpy: |string with€inside !|
-
-[fail]: your memccpy's return is false/doesn't work with basic params
-Test code:
-	char src[] = "test basic du memccpy !";
-	char buff1[22];
-
-	memset(buff1, 0, sizeof(buff1));
-	char *r1 = memccpy(buff1, src, 'm', 22);
-	char *r2 = ft_memccpy(buff1, src, 'm', 22);
-	if (r1 != r2)
-		exit(TEST_FAILED);
-	r1 = memccpy("", src, 'm', 0);
-	r2 = ft_memccpy("", src, 'm', 0);
-	if (r1 != r2)
-		exit(TEST_FAILED);
-	exit(TEST_SUCCESS);
-
-Diffs:
-     memccpy: ||
-  ft_memccpy: |test basic du m|
-
-[fail]: your memccpy does not work with not found char
-Test code:
-	char src[] = "test basic du memccpy !";
-	char buff1[22];
-	char buff2[22];
-	char *r1 = memccpy(buff1, src, 'z', 22);
-	char *r2 = ft_memccpy(buff2, src, 'z', 22);
-
-	if (r1 == r2)
-		exit(TEST_SUCCESS);
-	exit(TEST_FAILED);
-
-Diffs:
-     memccpy: |(null)|
-  ft_memccpy: |test basic du memccpy |
-
-ft_memmove:    [MISSING]
+ft_memcpy:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_memccpy:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
+ft_memmove:    [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_memcmp:     [MISSING]
 ft_strlen:     [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] [OK] 
 ft_isalpha:    [OK] 
