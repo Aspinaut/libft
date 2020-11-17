@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 09:25:24 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/17 10:52:50 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/17 16:57:45 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,22 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int			i;
-	size_t	len_buffer;
+	unsigned int			i;
+	unsigned int			j;
 
+	i = 0;
 	if (!*little)
 		return ((char *)big);
-	while (*big)
+	while (big[i] && i < len)
 	{
-		if (*big == *little)
+		j = 0;
+		while (big[i + j] == little[j] && (i + j) < len)
 		{
-			i = 0;
-			len_buffer = len;
-			while (big[i] == little[i] && little[i] && len_buffer)
-			{
-				i++;
-				len_buffer--;
-			}
-			if (!len_buffer)
-				return ((char *)big);
+			if (!little[j + 1])
+				return ((char *)&big[i]);
+			j++;
 		}
-		big++;
+		i++;
 	}
 	return (NULL);
 }
