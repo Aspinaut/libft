@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 08:20:24 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/13 06:27:44 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/17 18:47:33 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 char  *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-  char *s2;
-  unsigned int i;
+  char    *s2;
+  size_t  i;
 
-  s2 = ft_strnew(ft_strlen((char *)s));
   i = 0;
-  while (s[i] && s2[i])
+  if (!f || !s)
+    return (NULL);
+  if (!(s2 = ft_strnew(ft_strlen((char *)s))))
+    return (NULL);
+  while (s[i])
   {
-    (*f)(i, s2[i]);
+    s2[i] = (*f)(i, s[i]);
     i++;
   }
+  s2[i] = '\0';
   return (s2);
 }
