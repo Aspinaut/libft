@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 14:27:08 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/10 14:36:02 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/17 14:36:18 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 int		ft_strncmp(char *s1, char *s2, unsigned int n)
 {
-	while (n && *s1 && *s1 == *s2)
+	unsigned int i;
+
+	i = 0;
+	while ((s1[i] || s2[i]) && i < n)
 	{
-		s1++;
-		s2++;
-		n--;
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	return ((n) ? *s1 - *s2 : 0);
+	return (0);
 }

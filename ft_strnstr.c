@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 09:25:24 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/08 09:27:53 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/17 10:52:50 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int	i;
+	int			i;
 	size_t	len_buffer;
 
 	if (!*little)
