@@ -6,7 +6,7 @@
 /*   By: vmasse <vmasse@student.s19.be>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/01 18:01:20 by vmasse            #+#    #+#             */
-/*   Updated: 2020/11/15 17:35:35 by vmasse           ###   ########.fr       */
+/*   Updated: 2020/11/17 09:43:39 by vmasse           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 
 // char  *ft_itoa(int n);
 // char  **ft_strsplit(char const *s, char c);
-// void  *ft_calloc(size_t nmemb, size_t size);
 // size_t  ft_strlcpy(char *dst, const char *src, size_t size);
 // size_t  ft_strlcat(char *dst, const char *src, size_t size);
 
+void  *ft_calloc(size_t nmemb, size_t size);
 int  ft_memcmp(const void *s1, const void *s2, size_t n);
 void  *ft_memchr(const void *s, int c, size_t n);
 void  *ft_memmove(void *dest, const void *src, size_t n);
